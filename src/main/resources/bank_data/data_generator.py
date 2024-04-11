@@ -16,6 +16,8 @@ def generate_account_data(num_records, address_ids):
         account['contact_last_name'] = fake.last_name()
         account['contact_email'] = fake.email()
         account['contact_phone'] = fake.phone_number()
+        account['join_date'] = fake.date_of_birth(minimum_age=0, maximum_age=20)
+        account['date_of_birth'] = fake.date_of_birth(minimum_age=1, maximum_age=99)
         address_id = random.choice(address_ids)
         account['contact_address_id'] = address_id
         address_ids.remove(address_id)
@@ -82,7 +84,7 @@ insurance_account_data = generate_insurance_account_data(num_insurance_accounts,
 
 # Write data to CSV files
 with open('contact.csv', 'w', newline='') as csvfile:
-    fieldnames = ['contact_id', 'contact_status', 'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone', 'contact_address_id']
+    fieldnames = ['contact_id', 'contact_status', 'contact_first_name', 'contact_last_name', 'contact_email', 'contact_phone', 'contact_address_id', 'join_date', 'date_of_birth']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
     writer.writerows(account_data)
